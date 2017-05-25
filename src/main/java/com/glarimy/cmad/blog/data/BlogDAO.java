@@ -7,4 +7,5 @@ public interface BlogDAO {
 	public void create(Book book);
 	public Book read(int isbn);
 	public void addUser(User user);
+	public User findUser(String name);
 }

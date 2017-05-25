@@ -11,6 +11,27 @@ public class JPABlogDAO implements BlogDAO {
 	private EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.glarimy.library");
 
 	@Override
+	public void addUser(User user) {
+		// TODO Auto-generated method stub
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(user);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	@Override
+	public User findUser(String name) {
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		User userInfo = em.find(User.class, name);
+		em.getTransaction().commit();
+		em.close();
+		return userInfo;
+
+	}
+	
+	@Override
 	public void create(Book book) {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
@@ -30,13 +51,4 @@ public class JPABlogDAO implements BlogDAO {
 
 	}
 
-	@Override
-	public void addUser(User user) {
-		// TODO Auto-generated method stub
-		EntityManager em = factory.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(user);
-		em.getTransaction().commit();
-		em.close();
-	}
 }

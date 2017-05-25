@@ -14,6 +14,22 @@ public class GlarimyBlog implements Blog {
 	private BlogDAO dao = new JPABlogDAO();
 
 	@Override
+	public void addUser(User user) {
+		// TODO Auto-generated method stub
+		dao.addUser(user);
+		return;
+	}
+
+	@Override
+	public User findUser(String name) {
+		User userInfo = dao.findUser(name);
+		/*if (userInfo == null)
+			throw new BookNotFoundException();*/
+		return userInfo;
+		
+	}
+
+	@Override
 	public void add(Book book) throws InvalidBookException, DuplicateBookException, LibraryException {
 		if (book == null)
 			throw new InvalidBookException();
@@ -28,13 +44,6 @@ public class GlarimyBlog implements Blog {
 		if (book == null)
 			throw new BookNotFoundException();
 		return book;
-	}
-
-	@Override
-	public void addUser(User user) {
-		// TODO Auto-generated method stub
-		dao.addUser(user);
-		return;
 	}
 
 }

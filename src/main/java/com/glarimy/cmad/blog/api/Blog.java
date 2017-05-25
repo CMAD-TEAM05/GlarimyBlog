@@ -6,4 +6,6 @@ public interface Blog {
 	public Book find(int isbn) throws BookNotFoundException, LibraryException;
 	
 	public void addUser(User user);
+
+	public User findUser(String name);
 }

@@ -16,30 +16,37 @@ import com.glarimy.cmad.blog.service.GlarimyBlog;
 
 @Path("/blogapp")
 public class BlogController {
-	private static Blog library = new GlarimyBlog();
+	private static Blog team05Blog = new GlarimyBlog();
+
+	@POST
+	@Path("/user")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addUser(User user) {
+		team05Blog.addUser(user);
+		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/user/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response findUser(@PathParam("name") String name) {
+		User userInfo = team05Blog.findUser(name);
+		return Response.ok().entity(userInfo).build();
+	}
 
 	@POST
 	@Path("/book")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response add(Book book) {
-		library.add(book);
+		team05Blog.add(book);
 		return Response.ok().build();
 	}
 	
-	@POST
-	@Path("/user")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addUser(User user) {
-		library.addUser(user);
-		return Response.ok().build();
-		//return "Ranadheer";
-	}
-
 	@GET
 	@Path("/book/{isbn}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response find(@PathParam("isbn") int isbn) {
-		Book book = library.find(isbn);
+		Book book = team05Blog.find(isbn);
 		return Response.ok().entity(book).build();
 	}
 }
