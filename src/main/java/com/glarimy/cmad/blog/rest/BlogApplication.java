@@ -7,6 +7,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 @ApplicationPath("/")
 public class BlogApplication extends ResourceConfig {
 	public BlogApplication() {
-		packages("com.glarimy.cmad.library.rest");
+		packages("com.glarimy.cmad.blog.rest");
 	}
 }

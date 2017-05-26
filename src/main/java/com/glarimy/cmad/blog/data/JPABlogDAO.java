@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.Book;
 import com.glarimy.cmad.blog.api.User;
 
@@ -49,6 +50,16 @@ public class JPABlogDAO implements BlogDAO {
 		em.close();
 		return book;
 
+	}
+
+	@Override
+	public void addBlog(Blog blog) {
+		// TODO Auto-generated method stub
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(blog);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 }

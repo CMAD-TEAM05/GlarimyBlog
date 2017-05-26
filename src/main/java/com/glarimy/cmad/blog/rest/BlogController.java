@@ -10,13 +10,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.glarimy.cmad.blog.api.Blog;
+import com.glarimy.cmad.blog.api.BlogInterface;
 import com.glarimy.cmad.blog.api.Book;
 import com.glarimy.cmad.blog.api.User;
 import com.glarimy.cmad.blog.service.GlarimyBlog;
 
 @Path("/blogapp")
 public class BlogController {
-	private static Blog team05Blog = new GlarimyBlog();
+	private static BlogInterface team05Blog = new GlarimyBlog();
 
 	@POST
 	@Path("/user")
@@ -33,7 +34,15 @@ public class BlogController {
 		User userInfo = team05Blog.findUser(name);
 		return Response.ok().entity(userInfo).build();
 	}
-
+	
+	@POST
+	@Path("/blog")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addBlog(Blog blog) {
+		team05Blog.addBlog(blog);
+		return Response.ok().build();
+	}
+	
 	@POST
 	@Path("/book")
 	@Consumes(MediaType.APPLICATION_JSON)
