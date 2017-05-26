@@ -20,6 +20,36 @@ $(document).ready(function() {
 		var userEmail = $("#email").val();
 		var userPassword = $("#password").val();
 		var userMobile = $("#mobile").val();
+		if(userName==""){
+			alert("UserName is a Mandatory field. Please fill the username field");
+			$("#addUserForm").show();
+			return;
+		}
+		if(userAge==""){
+			alert("Please enter your age!");
+			$("#addUserForm").show();
+			return;
+		}
+	    var atpos = userEmail.indexOf("@");
+	    var dotpos = userEmail.lastIndexOf(".");
+	    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+	    	alert("Invalid email address");
+	    	$("#addUserForm").show();
+	    	return;
+	    }
+	    if(userPassword==""){
+			alert("Please enter a valid password!");
+			$("#addUserForm").show();
+			return;
+		}
+	    if(userMobile==""){
+			alert("Please enter your mobile number!");
+			$("#addUserForm").show();
+			return;
+		}
+	    $("#addUserResult").show();
+		$("#login").show();
+		$("#Signup").show();
 		var user = {
 				"name" : userName,
 				"age" : userAge,
