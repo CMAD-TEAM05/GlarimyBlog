@@ -28,7 +28,7 @@ $(document).ready(function() {
 				"mobile" : userMobile
 		};
 		$.ajax({
-			url : 'rest/blogapp/user',
+			url : 'http://localhost:9999/cmad-rest/rest/blogapp/user',
 			type : 'post',
 			dataType : 'json',
 			contentType: "application/json; charset=utf-8",
@@ -130,7 +130,7 @@ $(document).ready(function() {
 				"user" : user
 		};
 		$.ajax({
-			url : 'rest/blogapp/blog',
+			url : 'http://localhost:9999/cmad-rest/rest/blogapp/blog',
 			type : 'post',
 			dataType : 'json',
 			contentType: "application/json; charset=utf-8",
