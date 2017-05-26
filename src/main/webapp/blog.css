@@ -8,6 +8,9 @@ header{
 	background: #505050;
 	width:100%;
 }
+.addResult{
+	color:white;
+}
 .logo{
 	float:left;
 	line-height:20px;
