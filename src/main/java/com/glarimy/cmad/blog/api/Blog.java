@@ -2,12 +2,7 @@ package com.glarimy.cmad.blog.api;
 
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
+import org.mongodb.morphia.annotations.*;
 @Entity
 public class Blog {
 	@Id
@@ -15,7 +10,7 @@ public class Blog {
 	private String content;
 	private Date postedDate;
 	private String userName;
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Comment> comments;
 	
 	public String getTitle() {

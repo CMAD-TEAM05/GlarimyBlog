@@ -1,8 +1,7 @@
 package com.glarimy.cmad.blog.api;
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.mongodb.morphia.annotations.*;
 
 @Entity
 public class Comment {

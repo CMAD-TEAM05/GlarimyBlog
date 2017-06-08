@@ -1,7 +1,5 @@
 package com.glarimy.cmad.blog.api;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.mongodb.morphia.annotations.*;
 
 @Entity
 public class Author {

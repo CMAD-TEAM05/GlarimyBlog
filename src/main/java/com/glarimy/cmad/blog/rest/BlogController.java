@@ -58,4 +58,12 @@ public class BlogController {
 		Book book = team05Blog.find(isbn);
 		return Response.ok().entity(book).build();
 	}
+	@GET
+	@Path("/hello")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response returnHello() {
+		
+		String output = "Hello world";
+		return Response.status(200).entity(output).build();
+	}
 }

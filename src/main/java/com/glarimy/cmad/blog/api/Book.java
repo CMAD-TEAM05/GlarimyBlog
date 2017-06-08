@@ -2,25 +2,32 @@ package com.glarimy.cmad.blog.api;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import org.mongodb.morphia.annotations.*;
 
 @Entity
 public class Book {
 	@Id
 	private int isbn;
 	private String title;
-	@OneToOne(cascade=CascadeType.ALL)
+	
 	private Publisher publisher;
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+
 	private List<Author> authors;
 	
 	public Book() {
 
+	}
+	public Book(int isbn, String title) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+	}
+	public Book(int isbn, String title, Publisher publisher, List<Author> authors) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+		this.publisher = publisher;
+		this.authors = authors;
 	}
 
 	public int getIsbn() {
