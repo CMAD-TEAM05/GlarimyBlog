@@ -7,7 +7,7 @@ import org.mongodb.morphia.annotations.*;
 @Entity
 public class Book {
 	@Id
-	private int isbn;
+	private Integer isbn;
 	private String title;
 	
 	private Publisher publisher;
@@ -21,6 +21,12 @@ public class Book {
 		super();
 		this.isbn = isbn;
 		this.title = title;
+	}
+	public Book(int isbn, String title, Publisher publisher) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+		this.publisher = publisher;
 	}
 	public Book(int isbn, String title, Publisher publisher, List<Author> authors) {
 		super();
@@ -61,6 +67,9 @@ public class Book {
 	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
 	}
-	
+	@Override
+	public String toString(){
+		return getClass().getSimpleName() + "[isbn=" + isbn + ",title=" + title + "]";
+	}
 	
 }

@@ -1,5 +1,7 @@
 package com.glarimy.cmad.blog.service;
 
+import java.util.List;
+
 import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.BlogInterface;
 import com.glarimy.cmad.blog.api.Book;
@@ -12,11 +14,12 @@ import com.glarimy.cmad.blog.api.LibraryException;
 import com.glarimy.cmad.blog.api.User;
 import com.glarimy.cmad.blog.api.UserNotFoundException;
 import com.glarimy.cmad.blog.data.JPABlogDAO;
+import com.glarimy.cmad.blog.data.MongoBlogDAO;
 import com.glarimy.cmad.blog.data.BlogDAO;
 
 public class GlarimyBlog implements BlogInterface {
-	private BlogDAO dao = new JPABlogDAO();
-
+	//private BlogDAO dao = new JPABlogDAO();
+	private BlogDAO dao = new MongoBlogDAO();
 	@Override
 	public void addUser(User user) throws InvalidUserException{
 		if (user == null)
@@ -54,5 +57,12 @@ public class GlarimyBlog implements BlogInterface {
 		if (book == null)
 			throw new BookNotFoundException();
 		return book;
+	}
+	@Override
+	public List<Blog> findBlogsByTitle(String keyword)  {
+		List<Blog> blogs = dao.searchBlogsBytitle(keyword);
+		if (blogs == null)
+			throw new BookNotFoundException();
+		return blogs;
 	}
 }

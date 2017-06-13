@@ -1,5 +1,7 @@
 package com.glarimy.cmad.blog.rest;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,7 +20,6 @@ import com.glarimy.cmad.blog.service.GlarimyBlog;
 @Path("/blogapp")
 public class BlogController {
 	private static BlogInterface team05Blog = new GlarimyBlog();
-
 	@POST
 	@Path("/user")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -43,6 +44,34 @@ public class BlogController {
 		return Response.ok().build();
 	}
 	
+	@GET
+	@Path("/blog/{keyword}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getBlogsByTitle(@PathParam("keyword") String keyword) {
+		List<Blog> blogs = team05Blog.findBlogsByTitle(keyword);
+		return Response.ok().entity(blogs.get(0)).build();
+	}
+	
+	/*private static BlogInterface team05Blog = new GlarimyBlog();
+
+	@POST
+	@Path("/user")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addUser(User user) {
+		team05Blog.addUser(user);
+		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/user/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response findUser(@PathParam("name") String name) {
+		User userInfo = team05Blog.findUser(name);
+		return Response.ok().entity(userInfo).build();
+	}
+	
+
+	
 	@POST
 	@Path("/book")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -58,12 +87,14 @@ public class BlogController {
 		Book book = team05Blog.find(isbn);
 		return Response.ok().entity(book).build();
 	}
+	*/
 	@GET
 	@Path("/hello")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response returnHello() {
 		
-		String output = "Hello world";
+		String output = "Hello world Vijay";
+		
 		return Response.status(200).entity(output).build();
 	}
 }

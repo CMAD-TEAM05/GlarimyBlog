@@ -33,5 +33,9 @@ public class Publisher {
 	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+    
+	@Override
+	public String toString(){
+		return getClass().getSimpleName() + "[ name " + name + "]"; 
+	} 
 }

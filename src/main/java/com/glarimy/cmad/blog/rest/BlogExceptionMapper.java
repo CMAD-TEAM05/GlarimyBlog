@@ -5,7 +5,6 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import com.glarimy.cmad.blog.api.BlogNotFoundException;
-import com.glarimy.cmad.blog.api.BookNotFoundException;
 import com.glarimy.cmad.blog.api.InvalidBlogException;
 import com.glarimy.cmad.blog.api.InvalidUserException;
 import com.glarimy.cmad.blog.api.PermissionDeniedException;

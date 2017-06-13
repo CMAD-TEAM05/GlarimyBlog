@@ -1,5 +1,7 @@
 package com.glarimy.cmad.blog.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -60,6 +62,18 @@ public class JPABlogDAO implements BlogDAO {
 		em.persist(blog);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	@Override
+	public List<Blog> getBlogsByUser(String uname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Blog> searchBlogsBytitle(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

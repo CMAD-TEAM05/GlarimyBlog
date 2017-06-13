@@ -1,5 +1,7 @@
 package com.glarimy.cmad.blog.api;
 
+import java.util.List;
+
 public interface BlogInterface {
 	public void add(Book book) throws InvalidBookException, DuplicateBookException, LibraryException;
 
@@ -10,4 +12,6 @@ public interface BlogInterface {
 	public User findUser(String name);
 
 	public void addBlog(Blog blog);
+
+	public List<Blog> findBlogsByTitle(String keyword);
 }

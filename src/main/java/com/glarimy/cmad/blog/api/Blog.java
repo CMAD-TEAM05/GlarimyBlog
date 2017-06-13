@@ -2,10 +2,13 @@ package com.glarimy.cmad.blog.api;
 
 import java.util.Date;
 import java.util.List;
+
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 @Entity
 public class Blog {
 	@Id
+	private ObjectId id;
 	private String title;
 	private String content;
 	private Date postedDate;
