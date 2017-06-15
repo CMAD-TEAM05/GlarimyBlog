@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.BlogInterface;
 import com.glarimy.cmad.blog.api.Book;
@@ -49,9 +51,36 @@ public class BlogController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBlogsByTitle(@PathParam("keyword") String keyword) {
 		List<Blog> blogs = team05Blog.findBlogsByTitle(keyword);
-		return Response.ok().entity(blogs.get(0)).build();
+		//Response.status(200).entity(result).build();
+		ObjectMapper mapper = new ObjectMapper();
+		String result = null;
+		try {
+			 result = mapper.writeValueAsString(blogs);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return Response.ok().entity(result).build();
 	}
 	
+	@GET
+	@Path("/blogs/{uname}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getBlogsByUser(@PathParam("uname") String uname) {
+		List<Blog> blogs = team05Blog.findBlogsByUser(uname);
+		//Response.status(200).entity(result).build();
+		ObjectMapper mapper = new ObjectMapper();
+		String result = null;
+		try {
+			 result = mapper.writeValueAsString(blogs);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return Response.ok().entity(result).build();
+	}
 	/*private static BlogInterface team05Blog = new GlarimyBlog();
 
 	@POST

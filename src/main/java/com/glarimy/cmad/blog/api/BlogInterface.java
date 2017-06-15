@@ -14,4 +14,6 @@ public interface BlogInterface {
 	public void addBlog(Blog blog);
 
 	public List<Blog> findBlogsByTitle(String keyword);
+
+	public List<Blog> findBlogsByUser(String uname);
 }

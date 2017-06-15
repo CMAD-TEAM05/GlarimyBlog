@@ -8,7 +8,8 @@ import org.mongodb.morphia.annotations.*;
 @Entity
 public class Blog {
 	@Id
-	private ObjectId id;
+	private String UniqueID;
+	//private ObjectId id;
 	private String title;
 	private String content;
 	private Date postedDate;
@@ -16,6 +17,12 @@ public class Blog {
 	//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Comment> comments;
 	
+	public String getUniqueID() {
+		return UniqueID;
+	}
+	public void setUniqueID(String uniqueID) {
+		this.UniqueID = uniqueID;
+	}	
 	public String getTitle() {
 		return title;
 	}

@@ -76,6 +76,12 @@ public class MongoBlogDAO implements BlogDAO {
 	@Override
 	public void addBlog(Blog blog) {
 		// TODO Auto-generated method stub
+		String uniqueID = null;
+		uniqueID = Long.toHexString(Double.doubleToLongBits(Math.random()));
+		while(!blogColDAO.isIdUnique(uniqueID)){
+			uniqueID = Long.toHexString(Double.doubleToLongBits(Math.random()));
+		}
+		blog.setUniqueID(uniqueID);
 		blogColDAO.save(blog);
 	}
 
@@ -102,8 +108,13 @@ public class MongoBlogDAO implements BlogDAO {
 	@Override
 	public List<Blog> getBlogsByUser(String uname) {
 		// TODO Auto-generated method stub
-		
-		return null;
+		List<Blog> blogList;
+		blogList = blogColDAO.findBlogsbyUser(uname);
+		if(blogList == null){
+			return null;
+		} else {
+			return blogList;
+		}
 	}
 
 	@Override

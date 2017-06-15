@@ -65,4 +65,11 @@ public class GlarimyBlog implements BlogInterface {
 			throw new BookNotFoundException();
 		return blogs;
 	}
+	@Override
+	public List<Blog> findBlogsByUser(String uname)  {
+		List<Blog> blogs = dao.getBlogsByUser(uname);
+		if (blogs == null)
+			throw new BookNotFoundException();
+		return blogs;
+	}
 }
