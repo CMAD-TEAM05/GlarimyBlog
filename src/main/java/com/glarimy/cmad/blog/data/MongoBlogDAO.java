@@ -21,7 +21,7 @@ import com.mongodb.WriteResult;
 
 
 public class MongoBlogDAO implements BlogDAO {
-	MongoClient mongoclient = new MongoClient("localhost", 27017);
+	MongoClient mongoclient = new MongoClient("10.128.0.5", 27017);
 	DB db = mongoclient.getDB("BlogDB");
 	Morphia morphia = new Morphia();
 	UserDAO userDAO = new UserDAO(User.class,mongoclient,morphia,"BlogDB");
