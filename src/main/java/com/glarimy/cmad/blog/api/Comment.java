@@ -3,6 +3,7 @@ package com.glarimy.cmad.blog.api;
 import java.util.Date;
 import org.mongodb.morphia.annotations.*;
 
+//commentdsadsd
 @Entity
 public class Comment {
 	@Id

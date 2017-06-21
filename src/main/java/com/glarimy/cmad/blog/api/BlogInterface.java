@@ -16,4 +16,6 @@ public interface BlogInterface {
 	public List<Blog> findBlogsByTitle(String keyword);
 
 	public List<Blog> findBlogsByUser(String uname);
+
+	public boolean IsAuthenticateUser(String userName,String password);
 }

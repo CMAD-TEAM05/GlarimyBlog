@@ -72,4 +72,14 @@ public class GlarimyBlog implements BlogInterface {
 			throw new BookNotFoundException();
 		return blogs;
 	}
+
+	@Override
+	public boolean IsAuthenticateUser(String userName, String password) {
+		// TODO Auto-generated method stub
+		if(dao.isUserValid(userName, password)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

@@ -14,4 +14,6 @@ public interface BlogDAO {
 	public void addBlog(Blog blog);
 	public List<Blog> getBlogsByUser(String uname);
 	public List<Blog> searchBlogsBytitle(String keyword);
+	public boolean isUserValid(String uname, String password);
+	
 }

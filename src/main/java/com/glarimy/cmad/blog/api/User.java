@@ -7,12 +7,20 @@ import org.mongodb.morphia.annotations.*;
 public class User {
 	
 	@Id
-	private String name;	
+	private String username;	
+	private String name;
 	private int age;
 	private String emailId;
 	private int mobile;
 	private String password;
 	private List<Blog> blogs;
+	
+	public String getUserName() {
+		return username;
+	}
+	public void setUserName(String name) {
+		this.username = name;
+	}
 	
 	public String getName() {
 		return name;

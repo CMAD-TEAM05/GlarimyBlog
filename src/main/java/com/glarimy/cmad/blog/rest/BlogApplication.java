@@ -1,5 +1,5 @@
 package com.glarimy.cmad.blog.rest;
-
+//dddd
 import javax.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.server.ResourceConfig;

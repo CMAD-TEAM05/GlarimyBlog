@@ -19,16 +19,21 @@ import com.glarimy.cmad.blog.api.Book;
 import com.glarimy.cmad.blog.api.User;
 import com.glarimy.cmad.blog.service.GlarimyBlog;
 
+//ashdkjdsa
+
 @Path("/blogapp")
 public class BlogController {
 	private static BlogInterface team05Blog = new GlarimyBlog();
 	@POST
 	@Path("/user")
+	@Produces({ MediaType.TEXT_PLAIN })
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addUser(User user) {
 		team05Blog.addUser(user);
-		return Response.ok().build();
+		String response = "success";
+		return Response.ok(response).build();
 	}
+	
 	
 	@GET
 	@Path("/user/{name}")

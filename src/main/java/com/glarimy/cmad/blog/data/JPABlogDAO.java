@@ -76,4 +76,10 @@ public class JPABlogDAO implements BlogDAO {
 		return null;
 	}
 
+	@Override
+	public boolean isUserValid(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
