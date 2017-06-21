@@ -1,11 +1,12 @@
+var bloglist = [];
+
 $(document).ready(function() {
-//sdsad
-//dddd
+
 	$("#SignUpLink").click(function(){
 		$("#landingPageCentralArea").hide();
-  		$("#LoginAndSignUp").show();
-  		$('#loginbox').hide(); 
-  		$('#signupbox').show();
+		$("#LoginAndSignUp").show();
+		$('#loginbox').hide(); 
+		$('#signupbox').show();
 	});
 
 	$("#LoginLink").click(function(){
@@ -17,88 +18,7 @@ $(document).ready(function() {
 
 
 
-/*
 
-	$("#addUserLink").click(function(e) {
-		$("#LoginAndsignUp").show();
-		$("#addUserForm").show();
-	});
-
-	//Sign Up button handler
-	$("#Signup").click(function(){
-		$("#login").hide();
-		$("#Signup").hide();
-		$("#addUserForm").show();
-	});
-
-
-
-	//Register(submit button) handler
-	$("#addUserBtn").click(function() {
-		$("#addUserForm").hide();
-		$("#login").hide();
-		$("#Signup").hide();
-		var userName = $("#name").val();
-		var userAge = $("#age").val();
-		var userEmail = $("#email").val();
-		var userPassword = $("#password").val();
-		var userMobile = $("#mobile").val();
-		if(userName==""){
-			alert("UserName is a Mandatory field. Please fill the username field");
-			$("#addUserForm").show();
-			return;
-		}
-		if(userAge==""){
-			alert("Please enter your age!");
-			$("#addUserForm").show();
-			return;
-		}
-	    var atpos = userEmail.indexOf("@");
-	    var dotpos = userEmail.lastIndexOf(".");
-	    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-	    	alert("Invalid email address");
-	    	$("#addUserForm").show();
-	    	return;
-	    }
-	    if(userPassword==""){
-			alert("Please enter a valid password!");
-			$("#addUserForm").show();
-			return;
-		}
-	    if(userMobile==""){
-			alert("Please enter your mobile number!");
-			$("#addUserForm").show();
-			return;
-		}
-	    $("#addUserResult").show();
-		$("#login").show();
-		$("#Signup").show();
-		var user = {
-				"name" : userName,
-				"age" : userAge,
-				"emailId" : userEmail,
-				"password" : userPassword,
-				"mobile" : userMobile
-		};
-		$.ajax({
-			url : 'http://localhost:9999/cmad-rest/rest/blogapp/user',
-			type : 'post',
-			dataType : 'json',
-			contentType: "application/json; charset=utf-8",
-			success : function(data) {
-				$("#addUserResult").show();
-			},
-			data : JSON.stringify(user)
-		});
-	});
-
-	//login Handler 
-	$("#login").click(function(){
-		$("#login").hide();
-		$("#Signup").hide();
-		$("#loginForm").show();
-	});
-*/
 
 	//Login Button(after submitting username and paswd) Handler
 	$("#btn-signup").click(function() {
@@ -110,7 +30,7 @@ $(document).ready(function() {
 		var userPassword = $("#signup-password").val();
 		var userContact = $("#signup-contact").val();
 
-		
+
 		if(uname==""){
 			display_alert("UserName is a Mandatory field. Please fill the username field");
 			//display_alert("User name");
@@ -118,13 +38,13 @@ $(document).ready(function() {
 			return;
 		}
 
-	    var atpos = userEmail.indexOf("@");
-	    var dotpos = userEmail.lastIndexOf(".");
-	    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=userEmail.length) {
-	    	display_alert("Invalid email address");
-	    	$("#addUserForm").show();
-	    	return;
-	    }
+		var atpos = userEmail.indexOf("@");
+		var dotpos = userEmail.lastIndexOf(".");
+		if (atpos<1 || dotpos<atpos+2 || dotpos+2>=userEmail.length) {
+			display_alert("Invalid email address");
+			$("#addUserForm").show();
+			return;
+		}
 
 		if(Name==""){
 			display_alert("name is a Mandatory field. Please fill the Name field");
@@ -139,12 +59,12 @@ $(document).ready(function() {
 			return;
 		}
 
-	    if(userPassword==""){
+		if(userPassword==""){
 			display_alert("Please enter a valid password!");
 			$("#addUserForm").show();
 			return;
 		}
-	    if(userContact==""){
+		if(userContact==""){
 			display_alert("Please enter your mobile number!");
 			$("#addUserForm").show();
 			return;
@@ -167,36 +87,36 @@ $(document).ready(function() {
 				console.log("Successful AJAX call for sign up");
 				$("#addUserResult").show();
 				$("#SignUpSuccess").show();
+
 			},
 			data : JSON.stringify(user),
 			error: function(jqXHR,status){
-				
+
 			}
 		});
 
 
 		/*
-		//Send a ajax request to get all blogs by this user
-		var username = $("#Username").val();
-		$.ajax({
-			url : 'rest/blogapp/blog/{username}',
-			type : 'post',
-			dataType : 'json',
-			contentType: "application/json; charset=utf-8",
-			success : function(data) {
-				for (var i=0; i<data.length; i++) {
-					var row = $('<tr><td>' + data[i].title+ '</td><td>' + data[i].content + '</td></tr>');
-					$('#myBlogTable').append(row);
+			//Send a ajax request to get all blogs by this user
+			var username = $("#Username").val();
+			$.ajax({
+				url : 'rest/blogapp/blog/{username}',
+				type : 'post',
+				dataType : 'json',
+				contentType: "application/json; charset=utf-8",
+				success : function(data) {
+					for (var i=0; i<data.length; i++) {
+						var row = $('<tr><td>' + data[i].title+ '</td><td>' + data[i].content + '</td></tr>');
+						$('#myBlogTable').append(row);
+					}
+				},	    
+				error: function(jqXHR, textStatus, errorThrown){
+					alert('Error: ' + textStatus + ' - ' + errorThrown);
 				}
-			},	    
-			error: function(jqXHR, textStatus, errorThrown){
-				alert('Error: ' + textStatus + ' - ' + errorThrown);
-			}
-		});
-		*/
-		data : JSON.stringify(user)
+			});
+		 */
 	});
-    
+
 
 
 	//Login Button(after submitting username and paswd) Handler
@@ -205,102 +125,40 @@ $(document).ready(function() {
 		var uname = $("#login-username").val();
 		var passwd = $("#login-password").val();
 		if(validate(uname,passwd)){
-				alert("Login successful" );
-				console.log("Login successful");
-				displayHomepage(uname);
+			alert("Login successful" );
+			console.log("Login successful");
+			displayHomepage(uname);
+			console.log("Calling getBlogsByUser()");
+			getBlogsByUser(uname);
+
 		}else {
-				$("#loginAlert").show();
-				console.log("Login failed");
+			$("#loginAlert").show();
+			console.log("Login failed");
 		}
 		/*
-		//Send a ajax request to get all blogs by this user
-		var username = $("#Username").val();
-		$.ajax({
-			url : 'rest/blogapp/blog/{username}',
-			type : 'post',
-			dataType : 'json',
-			contentType: "application/json; charset=utf-8",
-			success : function(data) {
-				for (var i=0; i<data.length; i++) {
-					var row = $('<tr><td>' + data[i].title+ '</td><td>' + data[i].content + '</td></tr>');
-					$('#myBlogTable').append(row);
+			//Send a ajax request to get all blogs by this user
+			var username = $("#Username").val();
+			$.ajax({
+				url : 'rest/blogapp/blog/{username}',
+				type : 'post',
+				dataType : 'json',
+				contentType: "application/json; charset=utf-8",
+				success : function(data) {
+					for (var i=0; i<data.length; i++) {
+						var row = $('<tr><td>' + data[i].title+ '</td><td>' + data[i].content + '</td></tr>');
+						$('#myBlogTable').append(row);
+					}
+				},	    
+				error: function(jqXHR, textStatus, errorThrown){
+					alert('Error: ' + textStatus + ' - ' + errorThrown);
 				}
-			},	    
-			error: function(jqXHR, textStatus, errorThrown){
-				alert('Error: ' + textStatus + ' - ' + errorThrown);
-			}
-		});
-		*/
-		data : JSON.stringify(user)
-	});
-    
+			});
+		 */
 
-
-    /*
-	//Add Blog Button handler
-	$("#addBlog").click(function(){
-		$("#login").hide();
-		$("#Signup").hide();
-		$("#loginForm").hide();
-		$("#addBlogForm").show();
-	});
-	
-	//Add Blog Button handler
-	$("#CancelBlogBtn").click(function(){
-		$("#login").hide();
-		$("#Signup").hide();
-		$("#loginForm").hide();
-		$("#addBlogForm").hide();
-	});
-	
-	$("#updateProfile").click(function(){
-		confirm("Functionlity not supported Yet!");
 	});
 
-	$("#logout").click(function(){
-		$("#homePageMenu").hide();
-		$("#UpdateAccount").hide();
-		$("#AddBlog").hide();
-		$("#Logout").hide();
-		$("#loginForm").hide();
-		$("#addBlogForm").hide();
-		$("#login").show();
-		$("#Signup").show();
-	});
-	
 
 
-	$("#SubmitBlogBtn").click(function() {
-		$("#addUserForm").hide();
-		$("#addUserLink").hide();
-		$("#addBlogForm").hide();
-		var blogName = $("#BlogName").val();
-		var blogContent = $("#BlogContent").val();
-		var user = {
-				"name" : "user1",
-				"age" : "25",
-				"emailId" : "userEmail",
-				"password" : "userPassword",
-				"mobile" : "userMobile"
-		};
-		var blog = {
-				"title" : blogName,
-				"content" : blogContent,
-				"user" : user
-		};
-		$.ajax({
-			url : 'http://localhost:9999/cmad-rest/rest/blogapp/blog',
-			type : 'post',
-			dataType : 'json',
-			contentType: "application/json; charset=utf-8",
-			success : function(data) {
-				$("#submitBlogResult").show();
-			},
-			data : JSON.stringify(user)
-		});
-	});
-
-*/
 });
 function displaySignUpAndLoginForm(){
 	$("#LoginAndSignUp").show();
@@ -315,18 +173,74 @@ function validate(uname, passwd){
 }
 
 function display_alert(str){
-	
+
 	console.log("Display alter message"+str);
 	document.getElementById("SignUpFailureMsg").innerHTML = str;
 	$("#SignUpFailure").show();
 }
 
 function displayHomepage(username){
-	console.log("Displaying home page now");
+	var str = "Displaying home page now for user : "+username;
+	console.log(str);
 	$("#landingPageCentralArea").hide();
-  	$("#LoginAndSignUp").hide();
-  	$('#loginbox').hide(); 
-  	$('#signupbox').hide();
+	$("#LoginAndSignUp").hide();
+	$('#loginbox').hide(); 
+	$('#signupbox').hide();
 	$("#landingPage").hide();
 	$("#HomePage").show();
+}
+
+function getBlogsByUser(uname){
+	//make a AJAX call to get all blogs and update 
+	var username = "random2";
+	console.log("Make a AJAX call to get all blogs by user: "+username);
+
+	$.ajax({
+		url : 'rest/blogapp/blogs/' + username,
+		type : 'GET',
+		contentType: "application/json; charset=utf-8",
+		success : function(data,status,jqXHR) {
+			console.log("Successful AJAX call to get all blogs by User");
+			displayBlogs(data);
+		},
+		error: function(jqXHR,status){
+			console.log("Oops!! there was a problem!");	
+		}
+	});
+}
+
+function displayBlogs(data){
+	console.log(JSON.stringify(data));
+	console.log("Printing each entry : ");
+	var json = data;
+	var len = json.length;
+	var singleblog = "";
+
+
+
+	for (i=0; i < len; i++) {    
+		console.log(json[i].userName);
+		console.log(json[i]);
+		//var postedDate = new Date(json[i].postedDate);
+		postedDate = formatAMPM(json[i].postedDate);
+		console.log(postedDate);
+		singleblog+= '<h4><small>RECENT POSTS</small></h4>';
+		singleblog+= "<hr><h2>" + json[i].title + "</h2>";
+		singleblog+= '<h5><span class="glyphicon glyphicon-time"></span> Post by ' + json[i].userName + "," + postedDate + "</h5>"; 
+		singleblog+= '<h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5>';
+		singleblog+= "<br><p>" + json[i].content + "</p><br><br>";
+		console.log(singleblog);
+	}
+	document.getElementById('BlogArea').innerHTML = singleblog;
+}
+
+
+function formatAMPM(a) {
+	var d = new Date(a),
+    minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+    hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+    ampm = d.getHours() >= 12 ? 'pm' : 'am',
+    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
 }
