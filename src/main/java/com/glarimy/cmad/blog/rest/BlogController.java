@@ -1,8 +1,11 @@
 package com.glarimy.cmad.blog.rest;
 
+import java.security.Key;
+import java.util.Date;
 import java.util.List;
-
+import javax.crypto.spec.SecretKeySpec;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -10,14 +13,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.BlogInterface;
-import com.glarimy.cmad.blog.api.Book;
 import com.glarimy.cmad.blog.api.User;
+import com.glarimy.cmad.blog.jwtfilter.*;
 import com.glarimy.cmad.blog.service.GlarimyBlog;
+import io.jsonwebtoken.*;
+
+import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 //ashdkjdsa
 
@@ -41,7 +47,39 @@ public class BlogController {
 	public Response findUser(@PathParam("name") String name) {
 		User userInfo = team05Blog.findUser(name);
 		return Response.ok().entity(userInfo).build();
+	}	
+	
+	@POST
+	@Path("/login")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response authenticateUser(@PathParam("login") String login,
+            @PathParam("password") String password) {
+			try {
+				// Authenticate the user using the credentials quering db
+				//authenticate(login, password);
+
+				// Issue a token for the user
+				String token = issueToken(login);
+
+				// Return the token on the response
+				return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();
+
+			} catch (Exception e) {
+				return Response.status(UNAUTHORIZED).build();
+			}
 	}
+	
+	private String issueToken(String login) {
+		String keyString = "simplekey";
+        Key key = new SecretKeySpec(keyString.getBytes(), 0, keyString.getBytes().length, "DES");
+        String jwtToken = Jwts.builder()
+                .setSubject(login)
+                .setIssuer("cmad")
+                .setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS512, key)
+                .compact();
+        return jwtToken;
+    }
 	
 	@POST
 	@Path("/blog")
@@ -53,6 +91,7 @@ public class BlogController {
 	
 	@GET
 	@Path("/blog/{keyword}")
+	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBlogsByTitle(@PathParam("keyword") String keyword) {
 		List<Blog> blogs = team05Blog.findBlogsByTitle(keyword);
