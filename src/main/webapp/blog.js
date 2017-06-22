@@ -25,7 +25,7 @@ $(document).ready(function() {
 		//Ideally do validation here and then land on home page
 		var uname = $("#signup-uname").val();
 		var userEmail = $("#signup-email").val();
-		var Name = $("#signup-name").val();
+		//var Name = $("#signup-name").val();
 		var userAge = $("#signup-age").val();
 		var userPassword = $("#signup-password").val();
 		var userContact = $("#signup-contact").val();
@@ -46,12 +46,12 @@ $(document).ready(function() {
 			return;
 		}
 
-		if(Name==""){
+		/*if(Name==""){
 			display_alert("name is a Mandatory field. Please fill the Name field");
 			//display_alert("User name");
 			//$("#addUserForm").show();
 			return;
-		}
+		}*/
 
 		if(userAge==""){
 			display_alert("Please enter your age!");
@@ -71,7 +71,7 @@ $(document).ready(function() {
 		}
 
 		var user = {
-				"name" : Name,
+				//"name" : Name,
 				"username" : uname,
 				"age" : userAge,
 				"email" : userEmail,
@@ -123,7 +123,7 @@ $(document).ready(function() {
 		var uname = $("#login-username").val();
 		var passwd = $("#login-password").val();
 		var user = {
-			"name" : uname,
+			"username" : uname,
 			"password" : passwd
 		};
 		$.ajax({

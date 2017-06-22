@@ -1,5 +1,5 @@
 package com.glarimy.cmad.blog.data;
-//ahjaahsdsds
+
 import java.util.List;
 
 import org.mongodb.morphia.Morphia;
@@ -17,7 +17,7 @@ public class UserDAO extends BasicDAO<User, String> {
 	
 	public User findUserbyName(String name){
 		List<User> userlist;
-		Query<User> query = createQuery().field("name").equal(name);
+		Query<User> query = createQuery().field("username").equal(name);
 		userlist = query.asList();
 		if(userlist.isEmpty()){
 			return null;
@@ -30,7 +30,7 @@ public class UserDAO extends BasicDAO<User, String> {
 		// TODO Auto-generated method stub
 		//To do : store hash here, instead of pass
 		List<User> userlist;
-		Query<User> query = createQuery().field("name").equal(username).field("password").equal(password);
+		Query<User> query = createQuery().field("username").equal(username).field("password").equal(password);
 		userlist = query.asList();
 		if(userlist.isEmpty()){
 			return false;
