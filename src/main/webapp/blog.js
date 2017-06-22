@@ -153,6 +153,16 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	
+	//Button to Open Blog form
+	$("#btn-open-blog-form").click(function() {
+		//Hide Blogs and show blog form 
+		$("#BlogArea").show();
+		$("#AddBlogForm").show();
+		
+	});	
+	
 	
 	//Search blogs. Get blogs by title
 	$("#btn-search-blog").click(function() {
@@ -213,7 +223,7 @@ function getBlogsByUser(uname){
 	console.log("Make a AJAX call to get all blogs by user: "+username);
 
 	$.ajax({
-		url : 'rest/blogapp/blogs/' + username,
+		url : 'rest/blogapp/blog/' + username,
 		type : 'GET',
 		contentType: "application/json; charset=utf-8",
 		success : function(data,status,jqXHR) {
