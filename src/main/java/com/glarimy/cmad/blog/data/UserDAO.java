@@ -30,7 +30,7 @@ public class UserDAO extends BasicDAO<User, String> {
 		// TODO Auto-generated method stub
 		//To do : store hash here, instead of pass
 		List<User> userlist;
-		Query<User> query = createQuery().field("username").equal(username).field(password).equal(password);
+		Query<User> query = createQuery().field("name").equal(username).field("password").equal(password);
 		userlist = query.asList();
 		if(userlist.isEmpty()){
 			return false;

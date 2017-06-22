@@ -51,22 +51,26 @@ public class BlogController {
 	
 	@POST
 	@Path("/login")
+	@Produces({ MediaType.TEXT_PLAIN })
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response authenticateUser(@PathParam("login") String login,
-            @PathParam("password") String password) {
-			try {
-				// Authenticate the user using the credentials quering db
-				//authenticate(login, password);
-
+	public Response authenticateUser(User user) {
+		String login  = user.getName();
+		String password =  user.getPassword();
+		try {
+			if(team05Blog.IsAuthenticateUser(login, password)){
 				// Issue a token for the user
 				String token = issueToken(login);
-
-				// Return the token on the response
-				return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();
-
-			} catch (Exception e) {
+		
+				System.out.println("Token generated" + token);
+			
+				return Response.ok("success").header(AUTHORIZATION, "Bearer " + token).build();
+				
+			}else {
 				return Response.status(UNAUTHORIZED).build();
 			}
+		} catch (Exception e) {
+			return Response.status(UNAUTHORIZED).build();
+		}
 	}
 	
 	private String issueToken(String login) {

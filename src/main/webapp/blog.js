@@ -117,49 +117,33 @@ $(document).ready(function() {
 		 */
 	});
 
-
-
 	//Login Button(after submitting username and paswd) Handler
 	$("#btn-login").click(function() {
 		//Ideally do validation here and then land on home page
 		var uname = $("#login-username").val();
 		var passwd = $("#login-password").val();
-		if(validate(uname,passwd)){
-			alert("Login successful" );
-			console.log("Login successful");
-			displayHomepage(uname);
-			console.log("Calling getBlogsByUser()");
-			getBlogsByUser(uname);
-
-		}else {
-			$("#loginAlert").show();
-			console.log("Login failed");
-		}
-		/*
-			//Send a ajax request to get all blogs by this user
-			var username = $("#Username").val();
-			$.ajax({
-				url : 'rest/blogapp/blog/{username}',
-				type : 'post',
-				dataType : 'json',
-				contentType: "application/json; charset=utf-8",
-				success : function(data) {
-					for (var i=0; i<data.length; i++) {
-						var row = $('<tr><td>' + data[i].title+ '</td><td>' + data[i].content + '</td></tr>');
-						$('#myBlogTable').append(row);
-					}
-				},	    
-				error: function(jqXHR, textStatus, errorThrown){
-					alert('Error: ' + textStatus + ' - ' + errorThrown);
-				}
-			});
-		 */
-
+		var user = {
+			"name" : uname,
+			"password" : passwd
+		};
+		$.ajax({
+			url : 'rest/blogapp/login/',
+			type : 'post',
+			dataType : 'text',
+			contentType: "application/json; charset=utf-8",
+			data : JSON.stringify(user),
+			success : function(data, status, jqXHR){
+				displayHomepage(uname);
+				console.log("Calling getBlogsByUser()");
+				getBlogsByUser(uname);
+			},	    
+			error: function(jqXHR,status, err){
+				$("#loginAlert").show();
+				console.log("Login failed");
+			}
+		});
 	});
-
-
-
-
+	
 	//Search blogs. Get blogs by title
 	$("#btn-search-blog").click(function() {
 		//Ideally do validation here and then land on home page
@@ -174,14 +158,6 @@ $(document).ready(function() {
 
 function displaySignUpAndLoginForm(){
 	$("#LoginAndSignUp").show();
-}
-
-function validate(uname, passwd){
-	if(uname=="abc" && passwd=="123"){
-		return true;
-	}else{
-		return false;
-	}
 }
 
 function display_alert(str){
