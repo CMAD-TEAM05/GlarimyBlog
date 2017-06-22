@@ -16,7 +16,17 @@ $(document).ready(function() {
 		$('#loginbox').show(); 		
 	});
 
-
+	$("#btn-log-out").click(function(){
+		console.log("Loggin out, showing home page");
+		$('#landingPage').show();
+		$('#HomePage').hide();
+		$('#SignUpSuccess').hide();
+		$('#SignUpFailure').hide();
+		$("#landingPageCentralArea").show();
+		$("#LoginAndSignUp").hide();
+		$('#signupbox').hide();
+		$('#loginbox').hide(); 		
+	});
 
 
 
@@ -25,7 +35,7 @@ $(document).ready(function() {
 		//Ideally do validation here and then land on home page
 		var uname = $("#signup-uname").val();
 		var userEmail = $("#signup-email").val();
-		var Name = $("#signup-name").val();
+		//var Name = $("#signup-name").val();
 		var userAge = $("#signup-age").val();
 		var userPassword = $("#signup-password").val();
 		var userContact = $("#signup-contact").val();
@@ -46,12 +56,12 @@ $(document).ready(function() {
 			return;
 		}
 
-		if(Name==""){
+		/*if(Name==""){
 			display_alert("name is a Mandatory field. Please fill the Name field");
 			//display_alert("User name");
 			//$("#addUserForm").show();
 			return;
-		}
+		}*/
 
 		if(userAge==""){
 			display_alert("Please enter your age!");
@@ -71,7 +81,7 @@ $(document).ready(function() {
 		}
 
 		var user = {
-				"name" : Name,
+				//"name" : Name,
 				"username" : uname,
 				"age" : userAge,
 				"email" : userEmail,
@@ -123,7 +133,7 @@ $(document).ready(function() {
 		var uname = $("#login-username").val();
 		var passwd = $("#login-password").val();
 		var user = {
-			"name" : uname,
+			"username" : uname,
 			"password" : passwd
 		};
 		$.ajax({
@@ -170,6 +180,7 @@ function display_alert(str){
 function displayHomepage(username){
 	var str = "Displaying home page now for user : "+username;
 	console.log(str);
+	$("#AddBlogForm").hide();
 	$("#landingPageCentralArea").hide();
 	$("#LoginAndSignUp").hide();
 	$('#loginbox').hide(); 
@@ -183,7 +194,7 @@ function getBlogsByTitle(keyword){
 	
 	console.log("Make a AJAX call to get all blogs by title: "+keyword);
 	$.ajax({
-		url : 'rest/blogapp/blog/search' + keyword,
+		url : 'rest/blogapp/blog/search/' + keyword,
 		type : 'GET',
 		contentType: "application/json; charset=utf-8",
 		success : function(data,status,jqXHR) {
@@ -198,7 +209,7 @@ function getBlogsByTitle(keyword){
 
 function getBlogsByUser(uname){
 	//make a AJAX call to get all blogs and update 
-	var username = "random2";
+	var username = uname;
 	console.log("Make a AJAX call to get all blogs by user: "+username);
 
 	$.ajax({
