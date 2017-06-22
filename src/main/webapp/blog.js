@@ -16,7 +16,17 @@ $(document).ready(function() {
 		$('#loginbox').show(); 		
 	});
 
-
+	$("#btn-log-out").click(function(){
+		console.log("Loggin out, showing home page");
+		$('#landingPage').show();
+		$('#HomePage').hide();
+		$('#SignUpSuccess').hide();
+		$('#SignUpFailure').hide();
+		$("#landingPageCentralArea").show();
+		$("#LoginAndSignUp").hide();
+		$('#signupbox').hide();
+		$('#loginbox').hide(); 		
+	});
 
 
 
@@ -170,6 +180,7 @@ function display_alert(str){
 function displayHomepage(username){
 	var str = "Displaying home page now for user : "+username;
 	console.log(str);
+	$("#AddBlogForm").hide();
 	$("#landingPageCentralArea").hide();
 	$("#LoginAndSignUp").hide();
 	$('#loginbox').hide(); 
@@ -183,7 +194,7 @@ function getBlogsByTitle(keyword){
 	
 	console.log("Make a AJAX call to get all blogs by title: "+keyword);
 	$.ajax({
-		url : 'rest/blogapp/blog/search' + keyword,
+		url : 'rest/blogapp/blog/search/' + keyword,
 		type : 'GET',
 		contentType: "application/json; charset=utf-8",
 		success : function(data,status,jqXHR) {
@@ -198,7 +209,7 @@ function getBlogsByTitle(keyword){
 
 function getBlogsByUser(uname){
 	//make a AJAX call to get all blogs and update 
-	var username = "random2";
+	var username = uname;
 	console.log("Make a AJAX call to get all blogs by user: "+username);
 
 	$.ajax({
