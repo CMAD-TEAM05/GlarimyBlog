@@ -159,7 +159,19 @@ $(document).ready(function() {
 
 
 
+
+	//Search blogs. Get blogs by title
+	$("#btn-search-blog").click(function() {
+		//Ideally do validation here and then land on home page
+		var keyword = $("#blog-keyword").val();
+		console.log("Searching for keyword" + keyword);
+		console.log("Calling getBlogsByTitle()");
+		getBlogsByTitle(keyword);
+	});
+
+
 });
+
 function displaySignUpAndLoginForm(){
 	$("#LoginAndSignUp").show();
 }
@@ -188,6 +200,24 @@ function displayHomepage(username){
 	$('#signupbox').hide();
 	$("#landingPage").hide();
 	$("#HomePage").show();
+}
+
+
+function getBlogsByTitle(keyword){
+	
+	console.log("Make a AJAX call to get all blogs by title: "+keyword);
+	$.ajax({
+		url : 'rest/blogapp/blog/search' + keyword,
+		type : 'GET',
+		contentType: "application/json; charset=utf-8",
+		success : function(data,status,jqXHR) {
+			console.log("Successful AJAX call to get all blogs by title");
+			displayBlogs(data);
+		},
+		error: function(jqXHR,status){
+			console.log("Oops!! there was a problem!");	
+		}
+	});
 }
 
 function getBlogsByUser(uname){

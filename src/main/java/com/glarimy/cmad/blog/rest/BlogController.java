@@ -90,7 +90,7 @@ public class BlogController {
 	}
 	
 	@GET
-	@Path("/blog/{keyword}")
+	@Path("/blog/search/{keyword}")
 	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBlogsByTitle(@PathParam("keyword") String keyword) {
