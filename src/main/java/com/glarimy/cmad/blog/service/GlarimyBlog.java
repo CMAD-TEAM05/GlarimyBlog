@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.BlogInterface;
+import com.glarimy.cmad.blog.api.BlogNotFoundException;
 import com.glarimy.cmad.blog.api.Book;
 import com.glarimy.cmad.blog.api.BookNotFoundException;
 import com.glarimy.cmad.blog.api.DuplicateBookException;
@@ -62,14 +63,14 @@ public class GlarimyBlog implements BlogInterface {
 	public List<Blog> findBlogsByTitle(String keyword)  {
 		List<Blog> blogs = dao.searchBlogsBytitle(keyword);
 		if (blogs == null)
-			throw new BookNotFoundException();
+			throw new BlogNotFoundException();
 		return blogs;
 	}
 	@Override
 	public List<Blog> findBlogsByUser(String uname)  {
 		List<Blog> blogs = dao.getBlogsByUser(uname);
 		if (blogs == null)
-			throw new BookNotFoundException();
+			throw new BlogNotFoundException();
 		return blogs;
 	}
 

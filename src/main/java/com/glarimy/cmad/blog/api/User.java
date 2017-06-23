@@ -1,6 +1,8 @@
 package com.glarimy.cmad.blog.api;
 
 import java.util.List;
+
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
 @Entity
@@ -8,25 +10,17 @@ public class User {
 	
 	@Id
 	private String username;	
-	private String name;
 	private int age;
 	private String emailId;
 	private int mobile;
 	private String password;
 	private List<Blog> blogs;
 	
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
-	public void setUserName(String name) {
-		this.username = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public int getAge() {
 		return age;
@@ -40,17 +34,17 @@ public class User {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public int getMobile() {
 		return mobile;
 	}
 	public void setMobile(int mobile) {
 		this.mobile = mobile;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public List<Blog> getBlogs() {
 		return blogs;
@@ -58,5 +52,7 @@ public class User {
 	public void setBlogs(List<Blog> blogs) {
 		this.blogs = blogs;
 	}
+	
+	
 
 }
