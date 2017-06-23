@@ -1,4 +1,5 @@
 var bloglist = [];
+var this_user = "";
 
 $(document).ready(function() {
 
@@ -35,7 +36,7 @@ $(document).ready(function() {
 		//Ideally do validation here and then land on home page
 		var uname = $("#signup-uname").val();
 		var userEmail = $("#signup-email").val();
-		//var Name = $("#signup-name").val();
+		var Name = $("#signup-name").val();  //vijgc
 		var userAge = $("#signup-age").val();
 		var userPassword = $("#signup-password").val();
 		var userContact = $("#signup-contact").val();
@@ -81,7 +82,7 @@ $(document).ready(function() {
 		}
 
 		var user = {
-				//"name" : Name,
+				"name" : Name, //vijgc
 				"username" : uname,
 				"age" : userAge,
 				"email" : userEmail,
@@ -144,6 +145,7 @@ $(document).ready(function() {
 			data : JSON.stringify(user),
 			success : function(data, status, jqXHR){
 				displayHomepage(uname);
+				this_user = uname;
 				console.log("Calling getBlogsByUser()");
 				getBlogsByUser(uname);
 			},	    
@@ -154,6 +156,41 @@ $(document).ready(function() {
 		});
 	});
 
+	
+	
+	//Submit blog button 
+	$("#btn-submit-blog").click(function() {
+		//Ideally do validation here and then land on home page
+		var title = $("#blogtitle").val();
+		var  content = $("#blogcontent").val();
+		var username = this_user;
+		var postedDate =  new Date();	
+		var blog = {
+			"userName" : username,
+			"title" : title,
+			"content" : content,
+			"postedDate" : postedDate
+		};
+		$.ajax({
+			url : 'rest/blogapp/blog/',
+			type : 'post',
+			dataType : 'text',
+			contentType: "application/json; charset=utf-8",
+			data : JSON.stringify(blog),
+			success : function(data, status, jqXHR){
+				alert("Blog added successfully");
+				displayHomepage(this_user);
+				console.log("Adding a blog: success");
+				getBlogsByUser(this_user);
+			},	    
+			error: function(jqXHR,status, err){
+				alert("Blog addition failed");
+				displayHomepage(this_user);
+				console.log("Blog addition failed");
+			}
+		});
+	});
+	
 	
 	//Button to Open Blog form
 	$("#btn-open-blog-form").click(function() {
@@ -237,6 +274,8 @@ function getBlogsByUser(uname){
 }
 
 function displayBlogs(data){
+	$("#AddBlogForm").hide();
+	$("#BlogArea").show();
 	console.log(JSON.stringify(data));
 	console.log("Printing each entry : ");
 	var json = data;
