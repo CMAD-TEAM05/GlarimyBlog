@@ -1,5 +1,6 @@
 var bloglist = [];
 var this_user = "";
+//comment sajs
 
 $(document).ready(function() {
 
@@ -36,7 +37,7 @@ $(document).ready(function() {
 		//Ideally do validation here and then land on home page
 		var uname = $("#signup-uname").val();
 		var userEmail = $("#signup-email").val();
-		var Name = $("#signup-name").val();  //vijgc
+		//var Name = $("#signup-name").val();  //vijgc
 		var userAge = $("#signup-age").val();
 		var userPassword = $("#signup-password").val();
 		var userContact = $("#signup-contact").val();
@@ -82,7 +83,7 @@ $(document).ready(function() {
 		}
 
 		var user = {
-				"name" : Name, //vijgc
+				//"name" : Name, //vijgc
 				"username" : uname,
 				"age" : userAge,
 				"email" : userEmail,
@@ -162,7 +163,7 @@ $(document).ready(function() {
 	$("#btn-submit-blog").click(function() {
 		//Ideally do validation here and then land on home page
 		var title = $("#blogtitle").val();
-		var  content = $("#blogcontent").val();
+		var  content = $("#blogContent").val();
 		var username = this_user;
 		var postedDate =  new Date();	
 		var blog = {
@@ -195,7 +196,8 @@ $(document).ready(function() {
 	//Button to Open Blog form
 	$("#btn-open-blog-form").click(function() {
 		//Hide Blogs and show blog form 
-		$("#BlogArea").show();
+		console.log("hide blog area and show form");
+		$("#BlogArea").hide();
 		$("#AddBlogForm").show();
 		
 	});	
