@@ -9,10 +9,12 @@ $(document).ready(function() {
 		$("#LoginAndSignUp").show();
 		$('#loginbox').hide(); 
 		$('#signupbox').show();
+		$("#LandingPageBlogSec").hide();
 	});
 
 	$("#LoginLink").click(function(){
 		$("#landingPageCentralArea").hide();
+		$("#LandingPageBlogSec").hide();
 		$("#LoginAndSignUp").show();
 		$('#signupbox').hide();
 		$('#loginbox').show(); 		
@@ -25,6 +27,7 @@ $(document).ready(function() {
 		$('#SignUpSuccess').hide();
 		$('#SignUpFailure').hide();
 		$("#landingPageCentralArea").show();
+		$("#LandingPageBlogSec").hide();
 		$("#LoginAndSignUp").hide();
 		$('#signupbox').hide();
 		$('#loginbox').hide(); 		
@@ -135,8 +138,8 @@ $(document).ready(function() {
 		var uname = $("#login-username").val();
 		var passwd = $("#login-password").val();
 		var user = {
-			"username" : uname,
-			"password" : passwd
+				"username" : uname,
+				"password" : passwd
 		};
 		$.ajax({
 			url : 'rest/blogapp/login/',
@@ -157,8 +160,8 @@ $(document).ready(function() {
 		});
 	});
 
-	
-	
+
+
 	//Submit blog button 
 	$("#btn-submit-blog").click(function() {
 		//Ideally do validation here and then land on home page
@@ -167,10 +170,10 @@ $(document).ready(function() {
 		var username = this_user;
 		var postedDate =  new Date();	
 		var blog = {
-			"userName" : username,
-			"title" : title,
-			"content" : content,
-			"postedDate" : postedDate
+				"userName" : username,
+				"title" : title,
+				"content" : content,
+				"postedDate" : postedDate
 		};
 		$.ajax({
 			url : 'rest/blogapp/blog/',
@@ -191,27 +194,35 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
-	
+
+
 	//Button to Open Blog form
 	$("#btn-open-blog-form").click(function() {
 		//Hide Blogs and show blog form 
 		console.log("hide blog area and show form");
 		$("#BlogArea").hide();
 		$("#AddBlogForm").show();
-		
+
 	});	
-	
-	
+
+
 	//Search blogs. Get blogs by title
 	$("#btn-search-blog").click(function() {
-		//Ideally do validation here and then land on home page
+
 		var keyword = $("#blog-keyword").val();
 		console.log("Searching for keyword" + keyword);
 		console.log("Calling getBlogsByTitle()");
-		getBlogsByTitle(keyword);
+		getBlogsByTitle(keyword,false);
 	});
 
+	//Search blogs. Get blogs by title for landing page
+	$("#landing-btn-search-blog").click(function() {
+
+		var keyword = $("#landing-blog-keyword").val();
+		console.log("Searching for keyword" + keyword);
+		console.log("Calling getBlogsByTitle()");
+		getBlogsByTitle(keyword,true);
+	});
 
 });
 
@@ -239,8 +250,8 @@ function displayHomepage(username){
 }
 
 
-function getBlogsByTitle(keyword){
-	
+function getBlogsByTitle(keyword,isLandingPage){
+
 	console.log("Make a AJAX call to get all blogs by title: "+keyword);
 	$.ajax({
 		url : 'rest/blogapp/blog/search/' + keyword,
@@ -248,7 +259,13 @@ function getBlogsByTitle(keyword){
 		contentType: "application/json; charset=utf-8",
 		success : function(data,status,jqXHR) {
 			console.log("Successful AJAX call to get all blogs by title");
-			displayBlogs(data);
+			if(isLandingPage){
+				console.log("updating landing page");
+				displayLandingPageBlogs(data);	
+			}else {
+				console.log("Updating home page post login");
+				displayHomePageBlogs(data);
+			}
 		},
 		error: function(jqXHR,status){
 			console.log("Oops!! there was a problem!");	
@@ -267,7 +284,7 @@ function getBlogsByUser(uname){
 		contentType: "application/json; charset=utf-8",
 		success : function(data,status,jqXHR) {
 			console.log("Successful AJAX call to get all blogs by User");
-			displayBlogs(data);
+			displayHomePageBlogs(data);
 		},
 		error: function(jqXHR,status){
 			console.log("Oops!! there was a problem!");	
@@ -275,40 +292,192 @@ function getBlogsByUser(uname){
 	});
 }
 
-function displayBlogs(data){
+function displayHomePageBlogs(data){
 	$("#AddBlogForm").hide();
 	$("#BlogArea").show();
 	console.log(JSON.stringify(data));
 	console.log("Printing each entry : ");
 	var json = data;
-	var len = json.length;
 	var singleblog = "";
+	var comment_id = ""; //this is unique per blog, used for display purpose only
+	singleblog+= '<h4><small>RECENT POSTS</small></h4>';
 
+	if(data==null){
+		singleblog+='<h4>No blogs to display!!</h4>';
+	}else {
+		var len = json.length;
+		for (i=0; i < len; i++) {    
+			console.log(json[i].userName);
+			console.log(json[i]);
+			//var postedDate = new Date(json[i].postedDate);
+			postedDate = formatAMPM(json[i].postedDate);
+			comment_id = json[i].uniqueID + "c";
+			console.log(postedDate);
 
-
-	for (i=0; i < len; i++) {    
-		console.log(json[i].userName);
-		console.log(json[i]);
-		//var postedDate = new Date(json[i].postedDate);
-		postedDate = formatAMPM(json[i].postedDate);
-		console.log(postedDate);
-		singleblog+= '<h4><small>RECENT POSTS</small></h4>';
-		singleblog+= "<hr><h2>" + json[i].title + "</h2>";
-		singleblog+= '<h5><span class="glyphicon glyphicon-time"></span> Post by ' + json[i].userName + "," + postedDate + "</h5>"; 
-		singleblog+= '<h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5>';
-		singleblog+= "<br><p>" + json[i].content + "</p><br><br>";
-		console.log(singleblog);
+			singleblog+= '<div id="' + json[i].uniqueID + '">'; 
+			singleblog+= "<hr><h2>" + json[i].title + "</h2>";
+			singleblog+= '<h5><span class="glyphicon glyphicon-time"></span> Post by ' + json[i].userName + "," + postedDate + "</h5>"; 
+			singleblog+= '<h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5>';
+			singleblog+= "<br><p>" + json[i].content + "</p><br><br>";
+			//singleblog+= '<button type="submit" class="btn btn-primary" onclick=\'getComments(\"3fd59593f5b74b60\")\'>Show Comments test</button></div>';
+			singleblog+= '<button type="submit" class="btn btn-primary" onclick=\'getComments(\"' + json[i].uniqueID + '\")\'>Show Comments</button>';
+			singleblog+= '<div id="' + comment_id + '"> </div>'; //will be used for displaying comments and comment form
+			singleblog+= '</div>'; 
+			singleblog+= '<br><br>';
+			console.log(singleblog);
+		}
 	}
 	document.getElementById('BlogArea').innerHTML = singleblog;
 }
 
+function getAllBlogs(){
+	//make a AJAX call to get all blogs and update 
+	//var username = uname;
+	console.log("Make a AJAX call to get all blogs : ");
+
+	$.ajax({
+		url : 'rest/blogapp/blog/all',
+		type : 'GET',
+		contentType: "application/json; charset=utf-8",
+		success : function(data,status,jqXHR) {
+			console.log("Successful AJAX call to get all blogs");
+			displayLandingPageBlogs(data);
+		},
+		error: function(jqXHR,status){
+			console.log("Oops!! there was a problem getting all blogs!");	
+		}
+	});
+}
+
+function displayLandingPageBlogs(data){
+	$("#LoginAndSignUp").hide();
+	$("#landingPageCentralArea").hide();
+	$("#LandingPageBlogSec").show();
+
+	console.log(JSON.stringify(data));
+	console.log("Printing each entry : ");
+	var json = data;
+	
+	var singleblog = "";
+	singleblog+= '<h4><small>RECENT POSTS</small></h4>';
+
+	if(data==null){
+		singleblog+='<h4>No blogs to display!!</h4>';
+	}else{
+		var len = json.length;
+		for (i=0; i < len; i++) {    
+			console.log(json[i].userName);
+			console.log(json[i]);
+			//var postedDate = new Date(json[i].postedDate);
+			postedDate = formatAMPM(json[i].postedDate);
+			console.log(postedDate);
+			singleblog+= '<br><br>';
+			singleblog+= "<hr><h2>" + json[i].title + "</h2>";
+			singleblog+= '<h5><span class="glyphicon glyphicon-time"></span> Post by ' + json[i].userName + "," + postedDate + "</h5>"; 
+			singleblog+= '<h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5>';
+			singleblog+= "<br><p>" + json[i].content + "</p><br><br>";
+			console.log(singleblog);
+		}
+	}
+	document.getElementById('LandingPageBlogArea').innerHTML = singleblog;
+
+}
 
 function formatAMPM(a) {
 	var d = new Date(a),
-    minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
-    hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
-    ampm = d.getHours() >= 12 ? 'pm' : 'am',
-    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-    days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
+	minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+			hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+					ampm = d.getHours() >= 12 ? 'pm' : 'am',
+							months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+							days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+					return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
+}
+
+function getComments(BlogUniqueID){
+	console.log("Dumping bid :" + BlogUniqueID);
+	//var data ="";
+	//displayComments(data,BlogUniqueID)
+
+	//make a AJAX call to get the comment and update a particular blog
+	$.ajax({
+		url : 'rest/blogapp/blog/'+ BlogUniqueID + '/comment',
+		type : 'GET',
+		contentType: "application/json; charset=utf-8",
+		success : function(data,status,jqXHR) {
+			console.log("Successful AJAX call to get comments for a particular blog");
+			displayComments(data,BlogUniqueID);
+		},
+		error: function(jqXHR,status){
+			console.log("Oops!! there was a problem getting comments");	
+		}
+	});
+
+
+	//console.log(document.getElementById(uniqueID).innerHTML);
+}
+
+function displayComments(data,BlogUniqueID){
+	var postedDate;
+	console.log("Comments received :" + data);
+
+	var commentID = BlogUniqueID+"c";
+	var comments = "";
+	comments += '<h4>Leave a Comment:</h4>';
+	comments += '<form role="form">';
+	comments+= '<div class="form-group">';
+	comments+= '<textarea class="form-control" rows="3" required> </textarea>';
+	comments+= '</div>';
+	comments+= '<button type="submit" class="btn btn-success" onclick=\'addComment(\"' + BlogUniqueID + '\")\'' + '>Submit</button>';
+	comments+= '</form><br><br>';
+
+	if (data==null){
+		comments+= '<h4>No Comments to display</h4>';
+	}else {
+		var len = data.length;
+		comments += '<p><span class="badge">' + len + '</span>Comments:</p><br>';
+		for(i=0;i<len;i++){
+			//Add comments html
+			postedDate = formatAMPM(data[i].postedDate);
+			comments += '<div class="row"><div class="col-sm-2 text-center"><img src="profile.png" class="img-circle" height="65" width="65" alt="Avatar">';
+			comments += '</div>';
+			comments += '<div class="col-sm-10"> <h5>' + data[i].userName + '<small> &nbsp' + postedDate + '</small></h5>';
+			comments += '<p>' + data[i].content	+ '</p><br></div>';
+		}
+	}
+	console.log("Comments html : " + comments);
+	document.getElementById(commentID).innerHTML = comments;
+}
+
+function addComment(BlogUniqueID){
+	var commentID = BlogUniqueID+"c";
+	var elem = document.getElementById(commentID).getElementsByTagName("TEXTAREA");
+	console.log("Print the comment content:");
+	//console.log( elem );
+	//console.log(elem[0]);
+	console.log(elem[0].value);
+	var content = elem[0].value;
+	var postedDate = new Date();
+	//console.log(elem[0].innerHTML);  displays nothing 
+	//Write a comment to a blog and update the comment section(call getComments again ?)
+	var comment = {
+			"userName" : this_user,
+			"uniqueID" : BlogUniqueID,
+			"content" : content,
+			"postedDate" : postedDate
+	};
+
+	$.ajax({
+		url : 'rest/blogapp/comment' ,
+		type : 'post',
+		contentType: "application/json; charset=utf-8",
+		data : JSON.stringify(comment), 
+		success : function(data,status,jqXHR) {
+			console.log("Successful AJAX call to add comment");
+			getComments(BlogUniqueID);
+		},
+		error: function(jqXHR,status){
+			console.log("Oops!! there was a problem in adding comment!");	
+		}
+	});
+
 }
