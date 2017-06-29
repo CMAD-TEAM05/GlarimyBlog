@@ -49,4 +49,15 @@ public class BlogColDAO extends BasicDAO<Blog, String>{
 			return blogList;
 		}
 	}
+
+	public List<Blog> findAllBlogs() {
+		List<Blog> blogList;
+		Query<Blog> query = createQuery();
+		blogList = query.asList();
+		if(blogList.isEmpty()){
+			return null;
+		}else{
+			return blogList;
+		}
+	}
 }

@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.Book;
+import com.glarimy.cmad.blog.api.Comment;
 import com.glarimy.cmad.blog.api.User;
 
 public class JPABlogDAO implements BlogDAO {
@@ -80,6 +81,24 @@ public class JPABlogDAO implements BlogDAO {
 	public boolean isUserValid(String username, String password) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Blog> getAllBlogs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Comment> getCommentsByBlogID(String blogid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addComment(Comment comment) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

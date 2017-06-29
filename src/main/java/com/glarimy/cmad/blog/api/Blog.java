@@ -15,7 +15,7 @@ public class Blog {
 	private Date postedDate;
 	private String userName;
 	//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Comment> comments;
+	//private List<Comment> comments;
 	
 	public String getUniqueID() {
 		return UniqueID;
@@ -47,11 +47,6 @@ public class Blog {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public List<Comment> getComments() {
-		return comments;
-	}
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+
 	
 }

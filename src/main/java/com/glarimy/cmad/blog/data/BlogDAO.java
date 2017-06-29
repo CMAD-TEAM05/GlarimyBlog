@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.Book;
+import com.glarimy.cmad.blog.api.Comment;
 import com.glarimy.cmad.blog.api.User;
 
 public interface BlogDAO {
@@ -15,5 +16,7 @@ public interface BlogDAO {
 	public List<Blog> getBlogsByUser(String uname);
 	public List<Blog> searchBlogsBytitle(String keyword);
 	public boolean isUserValid(String uname, String password);
-	
+	public List<Blog> getAllBlogs();
+	public List<Comment> getCommentsByBlogID(String blogid);
+	public void addComment(Comment comment);	
 }
