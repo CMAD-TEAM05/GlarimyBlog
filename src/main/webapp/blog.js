@@ -1,3 +1,5 @@
+//test comment
+
 $(document).ready(function() {
 	$("#addUserLink").click(function(e) {
 		$("#addUserForm").show();
