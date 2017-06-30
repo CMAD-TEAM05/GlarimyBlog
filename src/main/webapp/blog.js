@@ -1,6 +1,6 @@
 var bloglist = [];
 var this_user = "";
-//comment sajs
+//comment 
 
 $(document).ready(function() {
 
