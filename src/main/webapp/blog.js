@@ -1,6 +1,6 @@
 var bloglist = [];
 var this_user = "";
-//comment 
+//comment  for jenkins trigger 
 
 $(document).ready(function() {
 
