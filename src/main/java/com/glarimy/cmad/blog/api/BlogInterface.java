@@ -18,4 +18,10 @@ public interface BlogInterface {
 	public List<Blog> findBlogsByUser(String uname);
 
 	public boolean IsAuthenticateUser(String userName,String password);
+
+	public List<Blog> findAllBlogs();
+
+	public List<Comment> findCommentsByBlogID(String blogid);
+
+	public void addComment(Comment comment);
 }

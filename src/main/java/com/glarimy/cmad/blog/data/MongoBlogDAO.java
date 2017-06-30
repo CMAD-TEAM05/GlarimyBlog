@@ -9,6 +9,7 @@ import org.mongodb.morphia.query.Query;
 
 import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.Book;
+import com.glarimy.cmad.blog.api.Comment;
 import com.glarimy.cmad.blog.api.User;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
@@ -22,10 +23,12 @@ import com.mongodb.WriteResult;
 
 public class MongoBlogDAO implements BlogDAO {
 	MongoClient mongoclient = new MongoClient("localhost", 27017);
+	//MongoClient mongoclient = new MongoClient("104.198.241.44", 27017);
 	DB db = mongoclient.getDB("BlogDB");
 	Morphia morphia = new Morphia();
 	UserDAO userDAO = new UserDAO(User.class,mongoclient,morphia,"BlogDB");
 	BlogColDAO blogColDAO = new BlogColDAO(Blog.class,mongoclient,morphia,"BlogDB");
+	CommentsDAO commentDAO = new CommentsDAO(Comment.class,mongoclient,morphia,"BlogDB");
 	
 	@Override
 	public void create(Book book) {
@@ -131,6 +134,18 @@ public class MongoBlogDAO implements BlogDAO {
 	}
 
 	@Override
+	public List<Blog> getAllBlogs() {
+		// TODO Auto-generated method stub
+		List<Blog> blogList;
+		blogList = blogColDAO.findAllBlogs();
+		if(blogList == null){
+			return null;
+		} else {
+			return blogList;
+		}
+	}
+	
+	@Override
 	public boolean isUserValid(String username, String password) {
 		if(userDAO.isUserValid(username, password)){
 			return true;
@@ -138,6 +153,24 @@ public class MongoBlogDAO implements BlogDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
+	@Override
+	public List<Comment> getCommentsByBlogID(String blogid) {
+		// TODO Auto-generated method stub
+		List<Comment> clist;
+		clist = commentDAO.findCommentsbyBlogID(blogid);
+		if(clist == null){
+			return null;
+		} else {
+			return clist;
+		}
+		
+	}
+
+	@Override
+	public void addComment(Comment comment) {
+		// TODO Auto-generated method stub
+		commentDAO.save(comment);
+	}	
 	
 }

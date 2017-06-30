@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.glarimy.cmad.blog.api.Blog;
 import com.glarimy.cmad.blog.api.BlogInterface;
+import com.glarimy.cmad.blog.api.Comment;
 import com.glarimy.cmad.blog.api.User;
 import com.glarimy.cmad.blog.jwtfilter.*;
 import com.glarimy.cmad.blog.service.GlarimyBlog;
@@ -111,6 +112,25 @@ public class BlogController {
 	}
 
 	@GET
+	@Path("/blog/all")
+	@JWTTokenNeeded
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllBlogs() {
+		List<Blog> blogs = team05Blog.findAllBlogs();
+		//Response.status(200).entity(result).build();
+		ObjectMapper mapper = new ObjectMapper();
+		String result = null;
+		try {
+			result = mapper.writeValueAsString(blogs);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return Response.ok().entity(result).build();
+	}
+	
+	@GET
 	@Path("/blog/{uname}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBlogsByUser(@PathParam("uname") String uname) {
@@ -127,6 +147,34 @@ public class BlogController {
 		System.out.println(result);
 		return Response.ok().entity(result).build();
 	}
+
+	@GET
+	@Path("/blog/{blogid}/comment")
+	@JWTTokenNeeded
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCommentsByBlogID(@PathParam("blogid") String blogid) {
+		List<Comment> comments = team05Blog.findCommentsByBlogID(blogid);
+		//Response.status(200).entity(result).build();
+		ObjectMapper mapper = new ObjectMapper();
+		String result = null;
+		try {
+			result = mapper.writeValueAsString(comments);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return Response.ok().entity(result).build();
+	}
+	
+	@POST
+	@Path("/comment")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addComment(Comment comment) {
+		team05Blog.addComment(comment);
+		return Response.ok().build();
+	}
+	
 	/*private static BlogInterface team05Blog = new GlarimyBlog();
 
 	@POST

@@ -40,11 +40,10 @@ footer {
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#"><b>Team05 BlogApp</b></a>
 				</div>
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">About Us</a></li>
-				</ul>
 				<ul class="nav navbar-nav navbar-right">
+				    <li><a href="#" onclick="getAllBlogs()"
+						id="ExploreBlogLink"><span class="glyphicon glyphicon-search"></span>
+							Explore blogs</a></li>
 					<li><a href="#" onclick="displaySignUpAndLoginForm()"
 						id="SignUpLink"><span class="glyphicon glyphicon-user"></span>
 							Sign Up</a></li>
@@ -64,225 +63,13 @@ footer {
 			</div>
 		</div>
 
-	</div>
-
-	<!--
-	    Login and Sign up form 
-	    -->
-	<div class="container" id="LoginAndSignUp" style="height: 650px">
-		<div id="loginbox" style="margin-top: 50px;"
-			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<div class="panel-title">Log In</div>
-					<div
-						style="float: right; font-size: 80%; position: relative; top: -10px">
-						<a href="#">Forgot password?</a>
-					</div>
-				</div>
-
-				<div style="padding-top: 30px" class="panel-body">
-
-					<div style="display: none" id="login-alert"
-						class="alert alert-danger col-sm-12"></div>
-
-					<form id="loginform" class="form-horizontal" role="form">
-
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
-								type="text" class="form-control" name="username" value=""
-								placeholder="username or email">
-						</div>
-
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-lock"></i></span> <input id="login-password"
-								type="password" class="form-control" name="password"
-								placeholder="password">
-						</div>
+		<!-- Explore blogs area  -->
 
 
-
-						<div class="input-group">
-							<div class="checkbox">
-								<label> <input id="login-remember" type="checkbox"
-									name="remember" value="1"> Remember me
-								</label>
-							</div>
-						</div>
-
-
-						<div style="margin-top: 10px" class="form-group">
-							<!-- Button -->
-
-							<div class="col-sm-12 controls">
-								<a id="btn-login" href="#" class="btn btn-primary">Login </a>
-							</div>
-
-						</div>
-
-						<div class="alert alert-danger alert-dismissable" id="loginAlert">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-
-							Incorrect Username/Password!
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-12 control">
-								<div
-									style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
-									Don't have an account! <a href="#"
-										onClick="$('#loginbox').hide(); $('#signupbox').show()">
-										Sign Up Here </a>
-								</div>
-							</div>
-						</div>
-					</form>
-
-
-
-				</div>
-			</div>
-		</div>
-		<div id="signupbox" style="display: none; margin-top: 50px"
-			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					<div class="panel-title">Sign Up</div>
-					<div
-						style="float: right; font-size: 85%; position: relative; top: -10px">
-						<a id="signinlink" href="#"
-							onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign
-							In</a>
-					</div>
-				</div>
-				<div class="panel-body">
-					<form id="signupform" class="form-horizontal" role="form">
-
-						<div id="signupalert" style="display: none"
-							class="alert alert-danger">
-							<p>Error:</p>
-							<span></span>
-						</div>
-
-						<div class="form-group">
-							<label for="email" class="col-md-3 control-label">Username</label>
-							<div class="col-md-9">
-								<input type="text" id="signup-uname" class="form-control"
-									name="email" placeholder="Choose a UserName">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="email" class="col-md-3 control-label">Email</label>
-							<div class="col-md-9">
-								<input type="text" id="signup-email" class="form-control"
-									name="email" placeholder="Email Address/UserName">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="firstname" class="col-md-3 control-label">Name
-							</label>
-							<div class="col-md-9">
-								<input type="text" id="signup-name" class="form-control"
-									name="firstname" placeholder="First Name">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="lastname" class="col-md-3 control-label">Age
-							</label>
-							<div class="col-md-9">
-								<input type="text" id="signup-age" class="form-control"
-									name="lastname" placeholder="Last Name">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="password" class="col-md-3 control-label">Password</label>
-							<div class="col-md-9">
-								<input type="password" id="signup-password" class="form-control"
-									name="passwd" placeholder="Password">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3  control-label">Phone Number</label>
-							<div class="col-md-9">
-								<input type="text" id="signup-contact" class="form-control"
-									name="icode" placeholder="">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<!-- Button -->
-							<div class="col-md-offset-3 col-md-9">
-								<button id="btn-signup" type="button" class="btn btn-info">
-									<i class="icon-hand-right"></i> Sign Up
-								</button>
-
-							</div>
-						</div>
-
-						<div style="border-top: 1px solid #999; padding-top: 20px"
-							class="form-group"></div>
-
-						<div class="alert alert-success alert-dismissable"
-							id="SignUpSuccess">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-
-							Congrats! Your registration is complete!! Please Log In
-						</div>
-
-						<div class="alert alert-success alert-dismissable"
-							id="SignUpFailure">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-
-							<p id="SignUpFailureMsg"></p>
-						</div>
-					</form>
-				</div>
-			</div>
-
-
-		</div>
-	</div>
-
-	<!--
-	    Home page here. This is the page displayed after log in
-	    -->
-	<div id="HomePage">
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Team05 BlogApp</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Gallery</a></li>
-						<li><a href="#">Contact</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a id="btn-log-out" href="#"><span
-								class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="container-fluid">
+		<div id="LandingPageBlogSec" class="container-fluid">
 			<div class="row content">
 				<div class="col-sm-3 sidenav">
-					<h4>John's Blog</h4>
+					<h4>Select a Category here</h4>
 					<ul class="nav nav-pills nav-stacked">
 						<li class="active"><a href="#section1">Home</a></li>
 						<li><a href="#section2">Category 1</a></li>
@@ -291,54 +78,23 @@ footer {
 					</ul>
 					<br>
 					<div class="input-group">
-						<input id="blog-keyword" type="text" class="form-control"
+						<input id="landing-blog-keyword" type="text" class="form-control"
 							placeholder="Search Blog.."> <span
 							class="input-group-btn">
-							<button id="btn-search-blog" class="btn btn-default"
+							<button id="landing-btn-search-blog" class="btn btn-default"
 								type="button">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</span>
 					</div>
 				</div>
-				<!-- In the below div by id: BlogArea, BlogForm only one should be displayed -->
-				<div id="AddBlogForm" class="col-sm-9">
-					Form for adding a blog
+				<!-- In the below div by id: 
+BlogArea, BlogForm only one should be displayed -->
 
-					<form>
-
-						
-						<div class="form-group">
-							<label for="exampleInputPassword1">Password</label> <input
-								type="password" class="form-control" id="exampleInputPassword1"
-								placeholder="Password">
-						</div>
-						
-						<div class="form-group">
-							<label for="exampleSelect1">Category</label> <select
-								class="form-control" id="exampleSelect1">
-								<option>Food</option>
-								<option>Travel</option>
-								<option>Politics</option>
-								<option>Nature</option>
-								<option>Sports</option>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="exampleTextarea">Content</label>
-							<textarea class="form-control" id="blogContent" rows="3"></textarea>
-						</div>
-						
-
-						<button id="btn-submit-blog" type="submit" class="btn btn-primary">Submit</button>
-						<button id="btn-cancel-blog" type="submit" class="btn btn-primary">Cancel</button>
-					</form>
-
-				</div>
+				
 
 				<br>
-				<div id="BlogArea" class="col-sm-9">
+				<div id="LandingPageBlogArea" class="col-sm-9">
 					<h4>
 						<small>RECENT POSTS</small>
 					</h4>
@@ -450,13 +206,410 @@ footer {
 					</div>
 				</div>
 			</div>
+        </div>
+
+
+
+
 		</div>
 
-	</div>
-	>
-	<footer class="container-fluid text-center" style="background: #111">
-		<p style="color: #fff">Footer Text</p>
-	</footer>
+		<!--
+	    Login and Sign up form 
+	    -->
+		<div class="container" id="LoginAndSignUp" style="height: 650px">
+			<div id="loginbox" style="margin-top: 50px;"
+				class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div class="panel-title">Log In</div>
+						<div
+							style="float: right; font-size: 80%; position: relative; top: -10px">
+							<a href="#">Forgot password?</a>
+						</div>
+					</div>
 
+					<div style="padding-top: 30px" class="panel-body">
+
+						<div style="display: none" id="login-alert"
+							class="alert alert-danger col-sm-12"></div>
+
+						<form id="loginform" class="form-horizontal" role="form">
+
+							<div style="margin-bottom: 25px" class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input
+									id="login-username" type="text" class="form-control"
+									name="username" value="" placeholder="username or email">
+							</div>
+
+							<div style="margin-bottom: 25px" class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-lock"></i></span> <input
+									id="login-password" type="password" class="form-control"
+									name="password" placeholder="password">
+							</div>
+
+
+
+							<div class="input-group">
+								<div class="checkbox">
+									<label> <input id="login-remember" type="checkbox"
+										name="remember" value="1"> Remember me
+									</label>
+								</div>
+							</div>
+
+
+							<div style="margin-top: 10px" class="form-group">
+								<!-- Button -->
+
+								<div class="col-sm-12 controls">
+									<a id="btn-login" href="#" class="btn btn-primary">Login </a>
+								</div>
+
+							</div>
+
+							<div class="alert alert-danger alert-dismissable" id="loginAlert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-hidden="true">&times;</button>
+
+								Incorrect Username/Password!
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12 control">
+									<div
+										style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
+										Don't have an account! <a href="#"
+											onClick="$('#loginbox').hide(); $('#signupbox').show()">
+											Sign Up Here </a>
+									</div>
+								</div>
+							</div>
+						</form>
+
+
+
+					</div>
+				</div>
+			</div>
+			<div id="signupbox" style="display: none; margin-top: 50px"
+				class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div class="panel-title">Sign Up</div>
+						<div
+							style="float: right; font-size: 85%; position: relative; top: -10px">
+							<a id="signinlink" href="#"
+								onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign
+								In</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form id="signupform" class="form-horizontal" role="form">
+
+							<div id="signupalert" style="display: none"
+								class="alert alert-danger">
+								<p>Error:</p>
+								<span></span>
+							</div>
+
+							<div class="form-group">
+								<label for="email" class="col-md-3 control-label">Username</label>
+								<div class="col-md-9">
+									<input type="text" id="signup-uname" class="form-control"
+										name="email" placeholder="Choose a UserName">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="email" class="col-md-3 control-label">Email</label>
+								<div class="col-md-9">
+									<input type="text" id="signup-email" class="form-control"
+										name="email" placeholder="Email Address/UserName">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="firstname" class="col-md-3 control-label">Name
+								</label>
+								<div class="col-md-9">
+									<input type="text" id="signup-name" class="form-control"
+										name="firstname" placeholder="First Name">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="lastname" class="col-md-3 control-label">Age
+								</label>
+								<div class="col-md-9">
+									<input type="text" id="signup-age" class="form-control"
+										name="lastname" placeholder="Last Name">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="password" class="col-md-3 control-label">Password</label>
+								<div class="col-md-9">
+									<input type="password" id="signup-password"
+										class="form-control" name="passwd" placeholder="Password">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3  control-label">Phone Number</label>
+								<div class="col-md-9">
+									<input type="text" id="signup-contact" class="form-control"
+										name="icode" placeholder="">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<!-- Button -->
+								<div class="col-md-offset-3 col-md-9">
+									<button id="btn-signup" type="button" class="btn btn-info">
+										<i class="icon-hand-right"></i> Sign Up
+									</button>
+
+								</div>
+							</div>
+
+							<div style="border-top: 1px solid #999; padding-top: 20px"
+								class="form-group"></div>
+
+							<div class="alert alert-success alert-dismissable"
+								id="SignUpSuccess">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-hidden="true">&times;</button>
+
+								Congrats! Your registration is complete!! Please Log In
+							</div>
+
+							<div class="alert alert-success alert-dismissable"
+								id="SignUpFailure">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-hidden="true">&times;</button>
+
+								<p id="SignUpFailureMsg"></p>
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+		<!--
+	    Home page here. This is the page displayed after log in
+	    -->
+		<div id="HomePage">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#myNavbar">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">Team05 BlogApp</a>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Home</a></li>
+							<li><a href="#">About</a></li>
+
+							<li><a href="#">Contact</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><button id="btn-open-blog-form" type="submit"
+									class="btn btn-primary">Create New Blog</button></li>
+							<li><a id="btn-log-out" href="#"><span
+									class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div class="container-fluid">
+				<div class="row content">
+					<div class="col-sm-3 sidenav">
+						<h4>John's Blog</h4>
+						<ul class="nav nav-pills nav-stacked">
+							<li class="active"><a href="#section1">Home</a></li>
+							<li><a href="#section2">Category 1</a></li>
+							<li><a href="#section3">Category 2</a></li>
+							<li><a href="#section3">Category 3</a></li>
+						</ul>
+						<br>
+						<div class="input-group">
+							<input id="blog-keyword" type="text" class="form-control"
+								placeholder="Search Blog.."> <span
+								class="input-group-btn">
+								<button id="btn-search-blog" class="btn btn-default"
+									type="button">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+					</div>
+					<!-- In the below div by id: 
+BlogArea, BlogForm only one should be displayed -->
+
+					<div id="AddBlogForm" class="col-sm-9">
+						<h2>You are a few minutes away from creating a Blog!!!</h2>
+
+						<form>
+
+
+							<div class="form-group">
+								<label for="exampleInputPassword1">Title</label> <input
+									type="text" class="form-control" id="blogtitle"
+									placeholder="Title for your Blog">
+							</div>
+
+							<div class="form-group">
+								<label for="exampleSelect1">Category</label> <select
+									class="form-control" id="blogcategory">
+									<option>Food</option>
+									<option>Travel</option>
+									<option>Politics</option>
+									<option>Nature</option>
+									<option>Sports</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="exampleTextarea">Content</label>
+								<textarea class="form-control" id="blogContent" rows="3"></textarea>
+							</div>
+
+
+							<button id="btn-submit-blog" type="submit"
+								class="btn btn-primary">Submit</button>
+							<button id="btn-cancel-blog" type="submit"
+								class="btn btn-primary">Cancel</button>
+						</form>
+
+					</div>
+
+					<br>
+					<div id="BlogArea" class="col-sm-9">
+						<h4>
+							<small>RECENT POSTS</small>
+						</h4>
+						<hr>
+						<h2>I Love Food</h2>
+						<h5>
+							<span class="glyphicon glyphicon-time"></span> Post by Jane Dane,
+							Sep 27, 2015.
+						</h5>
+						<h5>
+							<span class="label label-danger">Food</span> <span
+								class="label label-primary">Ipsum</span>
+						</h5>
+						<br>
+						<p>Food is my passion.</p>
+						<br> <br>
+
+
+						<h4>
+							<small>RECENT POSTS</small>
+						</h4>
+						<hr>
+						<h2>Officially Blogging</h2>
+						<h5>
+							<span class="glyphicon glyphicon-time"></span> Post by John Doe,
+							Sep 24, 2015.
+						</h5>
+						<h5>
+							<span class="label label-success">Lorem</span>
+						</h5>
+						<br>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna
+							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum consectetur
+							adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+							dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+							exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat.</p>
+						<hr>
+
+						<h4>Leave a Comment:</h4>
+						<form role="form">
+							<div class="form-group">
+								<textarea class="form-control" rows="3" required></textarea>
+							</div>
+							<button type="submit" class="btn btn-success">Submit</button>
+						</form>
+						<br> <br>
+
+						<!--
+	All comments go here.
+-->
+						<p>
+							<span class="badge">2</span> Comments:
+						</p>
+						<br>
+
+
+						<div class="row">
+							<div class="col-sm-2 text-center">
+								<img src="profile.png" class="img-circle" height="65" width="65"
+									alt="Avatar">
+							</div>
+							<div class="col-sm-10">
+								<h4>
+									Anja <small>Sep 29, 2015, 9:12 PM</small>
+								</h4>
+								<p>Keep up the GREAT work! I am cheering for you!! Lorem
+									ipsum dolor sit amet, consectetur adipiscing elit, sed do
+									eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+								<br>
+							</div>
+
+
+
+							<div class="col-sm-2 text-center">
+								<img src="profile.png" class="img-circle" height="65" width="65"
+									alt="Avatar">
+							</div>
+							<div class="col-sm-10">
+								<h4>
+									John Row <small>Sep 25, 2015, 8:25 PM</small>
+								</h4>
+								<p>I am so happy for you man! Finally. I am looking forward
+									to read about your trendy life. Lorem ipsum dolor sit amet,
+									consectetur adipiscing elit, sed do eiusmod tempor incididunt
+									ut labore et dolore magna aliqua.</p>
+								<br>
+								<p>
+									<span class="badge">1</span> Comment:
+								</p>
+								<br>
+								<div class="row">
+									<div class="col-sm-2 text-center">
+										<img src="profile.png" class="img-circle" height="65"
+											width="65" alt="Avatar">
+									</div>
+									<div class="col-xs-10">
+										<h4>
+											Nested Bro <small>Sep 25, 2015, 8:28 PM</small>
+										</h4>
+										<p>Me too! WOW!</p>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		>
+		<footer class="container-fluid text-center" style="background: #111">
+			<p style="color: #fff">Copyright 2017 | All rights reserved.</p>
+		</footer>
 </body>
 </html>

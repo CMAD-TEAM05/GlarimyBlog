@@ -7,6 +7,7 @@ import com.glarimy.cmad.blog.api.BlogInterface;
 import com.glarimy.cmad.blog.api.BlogNotFoundException;
 import com.glarimy.cmad.blog.api.Book;
 import com.glarimy.cmad.blog.api.BookNotFoundException;
+import com.glarimy.cmad.blog.api.Comment;
 import com.glarimy.cmad.blog.api.DuplicateBookException;
 import com.glarimy.cmad.blog.api.InvalidBlogException;
 import com.glarimy.cmad.blog.api.InvalidBookException;
@@ -73,7 +74,15 @@ public class GlarimyBlog implements BlogInterface {
 			throw new BlogNotFoundException();
 		return blogs;
 	}
-
+	@Override
+	public List<Blog> findAllBlogs()  {
+		List<Blog> blogs = dao.getAllBlogs();
+		if (blogs == null)
+			throw new BlogNotFoundException();
+		return blogs;
+	}
+	
+	
 	@Override
 	public boolean IsAuthenticateUser(String userName, String password) {
 		// TODO Auto-generated method stub
@@ -82,5 +91,23 @@ public class GlarimyBlog implements BlogInterface {
 		}else{
 			return false;
 		}
+	}
+
+	@Override
+	public List<Comment> findCommentsByBlogID(String blogid) {
+		// TODO Auto-generated method stub
+		List<Comment> comments = dao.getCommentsByBlogID(blogid);
+		if (comments == null)
+			throw new BlogNotFoundException();
+		return comments;
+		
+	}
+
+	@Override
+	public void addComment(Comment comment) {
+		// TODO Auto-generated method stub
+		if (comment == null)
+			throw new InvalidBlogException();
+		dao.addComment(comment);
 	}
 }
