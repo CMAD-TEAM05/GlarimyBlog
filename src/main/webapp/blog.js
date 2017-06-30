@@ -1,7 +1,7 @@
 var bloglist = [];
 var this_user = "";
 //comment  for jenkins trigger 
-
+//kjsdh
 $(document).ready(function() {
 
 	$("#SignUpLink").click(function(){
