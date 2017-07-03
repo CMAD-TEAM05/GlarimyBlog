@@ -72,9 +72,9 @@ footer {
 					<h4>Select a Category here</h4>
 					<ul class="nav nav-pills nav-stacked">
 						<li class="active"><a href="#section1">Home</a></li>
-						<li><a href="#section2">Category 1</a></li>
-						<li><a href="#section3">Category 2</a></li>
-						<li><a href="#section3">Category 3</a></li>
+						<li><a href="#section2">Travel</a></li>
+						<li><a href="#section3">Food</a></li>
+						<li><a href="#section3">Sports</a></li>
 					</ul>
 					<br>
 					<div class="input-group">
@@ -239,7 +239,7 @@ BlogArea, BlogForm only one should be displayed -->
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-user"></i></span> <input
 									id="login-username" type="text" class="form-control"
-									name="username" value="" placeholder="username or email">
+									name="username" value="" placeholder="username">
 							</div>
 
 							<div style="margin-bottom: 25px" class="input-group">
@@ -318,7 +318,7 @@ BlogArea, BlogForm only one should be displayed -->
 								<label for="email" class="col-md-3 control-label">Username</label>
 								<div class="col-md-9">
 									<input type="text" id="signup-uname" class="form-control"
-										name="email" placeholder="Choose a UserName">
+										name="email" placeholder="Choose a username">
 								</div>
 							</div>
 
@@ -326,7 +326,7 @@ BlogArea, BlogForm only one should be displayed -->
 								<label for="email" class="col-md-3 control-label">Email</label>
 								<div class="col-md-9">
 									<input type="text" id="signup-email" class="form-control"
-										name="email" placeholder="Email Address/UserName">
+										name="email" placeholder="Email Address">
 								</div>
 							</div>
 
@@ -335,7 +335,7 @@ BlogArea, BlogForm only one should be displayed -->
 								</label>
 								<div class="col-md-9">
 									<input type="text" id="signup-name" class="form-control"
-										name="firstname" placeholder="First Name">
+										name="firstname" placeholder="Your Full Name">
 								</div>
 							</div>
 							<div class="form-group">
@@ -343,7 +343,7 @@ BlogArea, BlogForm only one should be displayed -->
 								</label>
 								<div class="col-md-9">
 									<input type="text" id="signup-age" class="form-control"
-										name="lastname" placeholder="Last Name">
+										name="lastname" placeholder="Your Age">
 								</div>
 							</div>
 							<div class="form-group">
@@ -413,15 +413,11 @@ BlogArea, BlogForm only one should be displayed -->
 						<a class="navbar-brand" href="#">Team05 BlogApp</a>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
-							<li><a href="#">About</a></li>
-
-							<li><a href="#">Contact</a></li>
-						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><button id="btn-open-blog-form" type="submit"
 									class="btn btn-primary">Create New Blog</button></li>
+							<li><a id="btn-update-user" href="#"><span
+									class="glyphicon glyphicon-user"></span> Update Profile</a></li>
 							<li><a id="btn-log-out" href="#"><span
 									class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
 						</ul>
